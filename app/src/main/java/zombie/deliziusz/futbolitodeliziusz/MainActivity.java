@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    //Definimos lo que vamos a usar
+    //Definimos los elementos que vamos a usar
     SensorManager sensorManager;
     Sensor sensor;
     SensorEventListener sensorEventListener;
@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
                             marc2.setText(equipo2+"");
                         }
                     }
-
-
                 }
             }
 
@@ -105,6 +103,26 @@ public class MainActivity extends AppCompatActivity {
     private  void start(){
         sensorManager.registerListener(sensorEventListener,sensor,sensorManager.SENSOR_DELAY_GAME);
     }
+    private  void stop(){
+        sensorManager.unregisterListener(sensorEventListener);
+    }
 
+    @Override
+    protected void onPause() {
+        stop();
+        super.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        start();
+        super.onResume();
+        gol();
+    }
 
 }
